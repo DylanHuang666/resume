@@ -82,40 +82,89 @@
                             </a> 
                         </footer>
                     </div>
-            
-                <a class="button" href="#">下载 PDF 简历</a>
-            
-            <p>
+                <p class="downloadResume-wrapper">
+                    <a class="downloadResume" href="./resume.txt" target="_blank" download>下载 PDF 简历</a>
+                </p>
+            <p class="selfIntroduction">
                 黄琳杰，前端工程师。<br>
                 技能：前端开发，Rails 开发，Node.js 开发
             </p>
             
             </main>
-                <section>
+                <section class="skills">
                     <h2>技能</h2>
-                    <ol>
-                        <li>HTML 5 &amp; CSS 3</li>
-                        <li>JavaScript</li>
-                        <li>jQuery</li>
-                        <li>Vue</li>
-                        <li>React</li>
-                        <li>HTTP</li>
+                    <ol class="clearfix">
+                        <li>
+                            <h3>HTML 5 &amp; CSS 3</h3>
+                            <div class="progressBar">
+                                <div class="progress"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <h3>JavaScript</h3>
+                            <div class="progressBar">
+                                <div class="progress"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <h3>jQuery.js</h3>
+                            <div class="progressBar">
+                                <div class="progress"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <h3>Vue.js</h3>
+                            <div class="progressBar">
+                                <div class="progress"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <h3>React.js</h3>
+                            <div class="progressBar">
+                                <div class="progress"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <h3>Node.js</h3>
+                            <div class="progressBar">
+                                <div class="progress"></div>
+                            </div>
+                        </li>
                     </ol>
                 </section>
-                <section>
+                <section class="portfolio">
                     <h2>作品集</h2>
                     <nav>
-                        <ol>
-                        <li>所有</li>
-                        <li>框架</li>
-                        <li>原生JS&amp;CSS</li>
+                        <ol class="clearfix">
+                        <li id="portfolio1">所有</li>
+                        <li id="portfolio2">框架</li>
+                        <li id="portfolio3">原生JS&amp;CSS</li>
                         </ol>
+                        <div id="portfolioBar" class="bar state-1">
+                            <div class="bar-inner"></div>
+                        </div>
                     </nav>
-            
-                <div class="jobs">
-                    <div class="big"></div>
-                    <div class="small"></div>
-                    <div class="small"></div>
+                        <script>
+                           portfolio1.onclick=function(){
+                            portfolioBar.className="bar state-1"
+                           }
+                           portfolio2.onclick=function(){
+                            portfolioBar.className="bar state-2"
+                           }
+                           portfolio3.onclick=function(){
+                            portfolioBar.className="bar state-3"
+                           }
+                        </script>
+                <div class="works" style="width: 922px; height: 576px;">
+                    <div class="big" style="top: 0px; left: 0px;">
+                        <img src="./img/photo-1422480041422-130238c67fe2-1-2-2-1-1-607x576.jpg" alt="作品1">
+                    </div>
+                    <div class="small" style="top: 0px; right: 0px;">
+                        <img src="./img/kaboompics-1-2-1-1-294x278.jpg" alt="作品2">
+                    </div>
+                    <div class="small" style="top: 298px; right: 0px;">
+                        <img src="./img/photo-1421757295538-9c80958e75b0-2-2-1-1-294x278.jpg" alt="作品3">
+                    </div>
                 </div>
             
                 </section> 
