@@ -8,6 +8,37 @@
         <link rel="stylesheet" href="./a.css">
         <script src="//at.alicdn.com/t/font_793777_oeq5rqdusg.js"></script>
         <style type="text/css">
+            .loading{
+                width: 200px;
+                height: 200px;
+                /* border: 1px solid red; */
+                position: relative;
+            }
+            .loading::before,.loading::after{
+                content: '';
+                position: absolute;
+                width: 0px;
+                height: 0px;
+                background:black;
+                border-radius: 50%;
+                top:0;
+                left:0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                animation: s 1.5s linear infinite;
+            }
+            .loading::after{
+                animation-delay: 0.75s;
+            }
+            @keyframes s{
+                0%{
+                    width: 0; height: 0; opacity: 1;
+                }
+                100%{
+                    width: 100px; height: 100px; opacity: 0;
+                }
+            }
             .icon {
                width: 1em; 
                height: 1em;
@@ -15,20 +46,51 @@
                fill: currentColor;
                overflow: hidden;
             }
+            .site-welcome{
+                display: none;
+                position: fixed;
+                top: 0; left: 0; width: 100%; height: 100%;
+                background: #888;
+                z-index: 1;
+                justify-content: center;
+                align-items: center;
+            }
+            .site-welcome.active{
+                display: flex;
+            }
         </style>
     </head>
     <body>
-        <div class="topNavBar">
+        <div id="siteWelcome" class="site-welcome active">
+            <div class="loading"></div>
+        </div>
+        <div id="topNavBar" class="topNavBar">
             <div class="topNavBar-inner clearfix">
                 <a class="logo" href="#" alt="logo" style="float: left; ">
                     <span class="rs">RS</span><span class="card">card</span>
                 </a>
-                <nav style="float: right;">
+                <nav class="menu" style="float: right;">
                     <ul class="clearfix">
-                        <li><a href="#">关于</a></li>
-                        <li><a href="#">技能</a></li>
-                        <li><a href="#">作品</a></li>
-                        <li><a href="#">博客</a></li>
+                        <li><a href="#siteAbout">关于</a></li>
+                        <li>
+                            <a href="#siteSkills">技能</a>
+                        </li>
+                        <li class="menuTigger">
+                            <a href="#siteWorks">作品</a>
+                            <ul class="submenu">
+                                <li>作品1</li>
+                                <li>作品2</li>
+                                <li>作品3</li>
+                            </ul>
+                        </li>
+                        <li class="menuTigger">
+                            <a href="#">博客</a>
+                            <ul class="submenu">
+                                <li>博客1</li>
+                                <li>博客2</li>
+                                <li>博客3</li>
+                            </ul>
+                        </li>
                         <li><a href="#">日历</a></li>
                         <li><a href="#">联系方式</a></li>
                         <li><a href="#">其他</a></li>
@@ -40,7 +102,7 @@
             <div class="mask"></div>
         </div>
             <main>
-                <div class="userCard">
+                <div id="siteAbout" class="userCard">
                     <div class="pictureAndText clearfix">
                         <div class="picture">
                             <img src="./img/startuper-hover-1-299x347.jpg" alt="头像">
@@ -91,48 +153,48 @@
             </p>
             
             </main>
-                <section class="skills">
+                <section id="siteSkills" class="skills">
                     <h2>技能</h2>
                     <ol class="clearfix">
                         <li>
                             <h3>HTML 5 &amp; CSS 3</h3>
                             <div class="progressBar">
-                                <div class="progress"></div>
+                                <div class="progress" style="width: 70%;"></div>
                             </div>
                         </li>
                         <li>
                             <h3>JavaScript</h3>
                             <div class="progressBar">
-                                <div class="progress"></div>
+                                <div class="progress" style="width: 60%;"></div>
                             </div>
                         </li>
                         <li>
                             <h3>jQuery.js</h3>
                             <div class="progressBar">
-                                <div class="progress"></div>
+                                <div class="progress" style="width: 50%;"></div>
                             </div>
                         </li>
                         <li>
                             <h3>Vue.js</h3>
                             <div class="progressBar">
-                                <div class="progress"></div>
+                                <div class="progress" style="width: 40%;"></div>
                             </div>
                         </li>
                         <li>
                             <h3>React.js</h3>
                             <div class="progressBar">
-                                <div class="progress"></div>
+                                <div class="progress" style="width: 30%;"></div>
                             </div>
                         </li>
                         <li>
                             <h3>Node.js</h3>
                             <div class="progressBar">
-                                <div class="progress"></div>
+                                <div class="progress" style="width: 50%;"></div>
                             </div>
                         </li>
                     </ol>
                 </section>
-                <section class="portfolio">
+                <section id="siteWorks" class="portfolio">
                     <h2>作品集</h2>
                     <nav>
                         <ol class="clearfix">
@@ -164,9 +226,41 @@
                     </div>
                     <div class="small" style="top: 298px; right: 0px;">
                         <img src="./img/photo-1421757295538-9c80958e75b0-2-2-1-1-294x278.jpg" alt="作品3">
-                    </div>
+                    </div> 
                 </div>
             
                 </section> 
+                <script>
+                    setTimeout(function(){
+                        siteWelcome.classList.remove('active')
+                    },1000) 
+                    window.onscroll=function(xxxxx){
+                        if(window.scrollY > 0){
+                            topNavBar.classList.add('sticky')
+                        }else{
+                            topNavBar.classList.remove('sticky')
+                        }
+                    }
+                    let liTags=document.querySelectorAll('nav.menu > ul > li')
+                    for(let i=0;i<liTags.length;i++){
+                        liTags[i].onmouseenter=function(x){
+                            x.currentTarget.classList.add('active')
+                        }
+                        liTags[i].onmouseleave=function(x){
+                            x.currentTarget.classList.remove('active')
+                        }
+                    }
+                    let aTags = document.querySelectorAll('nav.menu > ul > li > a')
+                    for(let i=0;i<aTags.length;i++){
+                        aTags[i].onclick=function(x){
+                            x.preventDefault()
+                            let a=x.currentTarget
+                            let href=a.getAttribute('href')
+                            let element=document.querySelector(href)
+                            let top=element.offsetTop
+                            window.scrollTo(0,top-80)
+                        }
+                    }
+                </script>
     </body>
 </html>
