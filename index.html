@@ -230,29 +230,32 @@
                 </div>
             
                 </section> 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script> <!--引用tween.js库-->
                 <script>
                     // setTimeout(function(){
                         // siteWelcome.classList.remove('active')
                     // },1000) 
 
+                    //先遍历标记为'[data-x]'的元素，添加offset类,先都往下100px 
                     let specialTags=document.querySelectorAll('[data-x]')
                     for(let i=0;i<specialTags.length;i++){
                         specialTags[i].classList.add('offset')
                     }
 
-                    yyy()
+                    findClosest()  //一开始就有往上的动画，其他标记元素滚动到它的位置时才有动画
                     
+                    //滚动事件，topNavBar添加类，变白变小，字体颜色改变为黑色
                     window.onscroll=function(x){
                         if(window.scrollY > 0){
                             topNavBar.classList.add('sticky')
                         }else{
                             topNavBar.classList.remove('sticky')
                         }
-                        yyy()
+                        findClosest()
                     }
-
-                    function yyy(){
+                    
+                    //找到与滚动位移差值最小（最近，视口大部分都是这个标记元素）的标记元素，获取到a和a对应的导航里的li元素，添加'highlight'类高亮导航
+                    function findClosest(){
                         let specialTags=document.querySelectorAll('[data-x]')
                         let minIndex=0
                         for(let i=1;i<specialTags.length;i++){
@@ -262,15 +265,16 @@
                         }
                         specialTags[minIndex].classList.remove('offset')
                         let id=specialTags[minIndex].id
-                        let a=document.querySelector('a[href="#'+ id +'"]')
+                        let a=document.querySelector('a[href="#'+ id +'"]')  //获取到标记元素的id对应的a元素
                         let li=a.parentNode
                         let brothersAndMe=li.parentNode.children
                         for(let i=0;i<brothersAndMe.length;i++){
-                            brothersAndMe[i].classList.remove('highlight')
+                            brothersAndMe[i].classList.remove('highlight') //高亮前先遍历去除所有之前的高亮
                         }
-                        li.classList.add('highlight')
+                        li.classList.add('highlight') //添加高亮
                     }    
                     
+                    //鼠标移入高亮导航
                     let liTags=document.querySelectorAll('nav.menu > ul > li')
                     for(let i=0;i<liTags.length;i++){
                         liTags[i].onmouseenter=function(x){
@@ -282,6 +286,7 @@
                     }
                     let aTags = document.querySelectorAll('nav.menu > ul > li > a')
 
+                    //点击导航栏滚动到相应位置，运用了tween.js去移动
                     function animate(time) {
                         requestAnimationFrame(animate);
                         TWEEN.update(time);
@@ -306,9 +311,9 @@
                             var coords = { y: currentTop }; 
                             var tween = new TWEEN.Tween(coords) 
                                 .to({ y: targetTop }, t) 
-                                .easing(TWEEN.Easing.Quadratic.InOut) 
+                                .easing(TWEEN.Easing.Quadratic.InOut)  //淡进淡出，动画平滑
                                 .onUpdate(function() { 
-                                    window.scrollTo( 0,coords.y)   
+                                    window.scrollTo( 0,coords.y)  // coords.y 值每次都会改变，分为很多次去移 
                                 })
                                 .start(); 
                                
