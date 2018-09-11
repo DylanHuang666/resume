@@ -28,6 +28,21 @@ body{
   [data-x].active{
     outline: 5px solid red;
   }
+  [data-x].offset{
+    transform: translateY(100px);
+  }
+  [data-x]{
+    transform: translateY(0);
+    transition: all 0.5s;
+  }
+  /* @keyframes slideUp{
+    0%{
+      transform: translateY(-30px);
+    }
+    100%{
+      transform: translateY(0);
+    }
+  } */
   .topNavBar {
     padding: 20px 0px 20px 0px;
     position: fixed;
