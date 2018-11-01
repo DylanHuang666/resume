@@ -180,13 +180,26 @@
         </div>
 
     </section>
+    <section class="message">
+        <h2>留言</h2>
+        <ol id="messageList"></ol>
+        <form id="postMessageForm" style="max-width: 720px;margin: 50px auto;">
+            <label for="name">姓名</label>
+            <input type="text" name="name" id="name">
+            <label for="content">内容</label>
+            <input type="text" name="content" id="content">
+            <input type="submit" value="提交">
+        </form>
+    </section>
     <!--引用tween.js库-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
     <script src="./init-swiper.js"></script>
     <script src="./auto-slide-up.js"></script>
     <script src="./sticky-topbar.js"></script>
     <script src="./smoothly-navigation.js"></script>
+    <script src="./message.js"></script>
 </body>
 
 </html>
