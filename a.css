@@ -339,7 +339,7 @@ section.skills.offset .progress{
 
 section.portfolio{
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   max-width: 750px;
 }
 section.portfolio nav{
@@ -424,11 +424,12 @@ section.portfolio .swiper-button-next{
 
 section.message>ol{
   max-width: 720px;
-  margin: 0 auto;
+  margin: 20px auto;
   border-top: 1px solid #cdcfd1;
 }
 
 section.message>ol>li{
-  padding: 16px;
+  padding: 10px;
   border-bottom: 1px solid #cdcfd1;
+  color: rgb(41, 43, 129);
 }
