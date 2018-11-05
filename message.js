@@ -1,43 +1,16 @@
 ! function () {
 
-    var view = document.querySelector('section.message')
+    var view = View('section.message')
 
-    var model = {
-        init: function () {
-            //初始化
-            var APP_ID = 'KGc1iw3UmW7o3935K8Aj3iai-9Nh9j0Va';
-            var APP_KEY = 'k6OKlRkntyatYnq5l1R6yazH';
-            AV.init({
-                appId: APP_ID,
-                appKey: APP_KEY
-            });
-        },
-        fetch: function () {
-            var query = new AV.Query('Message');     //获取到数据库相应表里的所有数据 
-            return query.find()
-        },
-        save: function (name,content) {
-            var Message = AV.Object.extend('Message');    //创建一个class（表），表名字为Message
-            var massage = new Message();          //往表里创建一个数据行
-            return massage.save({
-                'name': name,             //存数据到数据行里面
-                'content': content
-            })
-        }
-    }
-
-    var controller = {
-        view: null,
-        model: null,
+    var model = Model({resourceName:'Message'})
+        
+    var controller = Controller({ 
         messageList: null,
+        form:null,
         init: function (view,model) {
-            this.view = view
-            this.model = model
             this.messageList = document.querySelector('#messageList')
             this.form = document.querySelector('#postMessageForm')
-            this.model.init()
             this.loadMessages()
-            this.bindEvents()
         },
         loadMessages: function () {
             //获取到数据库相应表里的所有数据           
@@ -63,17 +36,17 @@
             let myForm = this.form
             let content = myForm.querySelector('input[name=content]').value //获取到用户输入的留言内容
             let name = myForm.querySelector('input[name=name]').value
-            this.model.save(name,content).then(function (object) { //存入成功后执行该函数
+            this.model.save({'name':name,'content':content}).then(function (object) { //存入成功后执行该函数
                 alert('存入成功');
                 let li = document.createElement('li')
                 li.innerText = `${object.attributes.name}:${object.attributes.content}`
-                let messageList = document.querySelector('#messageList')
+                let messageList = this.messageList
                 messageList.appendChild(li)
                 myForm.querySelector('input[name=content]').value = ''
                 myForm.querySelector('input[name=name]').value = ''
             })
         }
-    }
+    })
     controller.init(view,model)
 
     // var TestObject = AV.Object.extend('TestObject');
